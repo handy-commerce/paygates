@@ -1,0 +1,33 @@
+{
+    "name": "lexisvar/paygates",
+    "type": "project",
+    "description": "Dev",
+    "keywords": ["payment"],
+    "homepage": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexis Vargas",
+            "email": "lexisvar@gmail.com"
+        },
+        {
+            "name":     "Handy Commerce",
+            "homepage": "http://handycommerce.co/"
+        }
+    ],
+    "require": {
+        "epayco/epayco-php" : "@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Gateways": "" }
+    },
+    "target-dir": "Gateways",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.2-dev"
+        }
+    }
+}
