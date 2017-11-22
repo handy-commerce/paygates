@@ -24,10 +24,10 @@
     "autoload": {
         "psr-0": { "Gateways": "" }
     },
-    "target-dir": "Gateways",
+    "target-dir": "",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.0.2-dev"
+            "dev-master": "0.0.1-dev"
         }
     }
 }
