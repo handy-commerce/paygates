@@ -1,5 +1,5 @@
 <?php
-namespace Payum\Epayco\Model;
+namespace Gateways\Model;
 
 class PaymentCash extends PaymentPSE
 {
