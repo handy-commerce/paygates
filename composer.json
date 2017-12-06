@@ -15,8 +15,8 @@
             "homepage": "http://handycommerce.co/"
         }
     ],
-    "require": {
-        "epayco/epayco-php" : "@dev"
+    "require-dev": {
+        "epayco/epayco-php" : "dev-master"
     },
     "repositories": [
         {
