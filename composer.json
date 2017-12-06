@@ -21,7 +21,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/lexisvar/epayco"
+            "url": "https://github.com/lexisvar/epayco-php"
         }
     ],
     "config": {
