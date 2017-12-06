@@ -1,7 +1,7 @@
 <?php
 namespace Gateways;
 
-use Epayco\Epayco;
+use Gateways\Classes\Sdk;
 
 class Api
 {
@@ -9,15 +9,13 @@ class Api
     protected $response;
 
     /**
-     * @var array
+     * @var sdk
      */
-    protected $options = [];
+    protected $sdk;
 
+    protected $sdk_name;
 
-    public function __construct(array $options)
-    {
-        $this->options = $options;
-    }
+    protected $credentials;
 
     /**
      * @param $method
@@ -52,15 +50,10 @@ class Api
 
     }
 
-    public function createPayment($fields){
-        $epayco = new Epayco(array(
-            "apiKey" => $fields['public_key'],
-            "privateKey" => $fields['private_key'],
-            "lenguage" => "ES",
-            "test" => true
-        ));
-
-        $this->response = $epayco->charge->create($fields);
+    public function createPayment($data){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        $this->sdk = $sdk->getSDK();
+        $this->response = $this->sdk->charge->create($data);
     }
 
     /**
@@ -77,5 +70,37 @@ class Api
     public function setResponse($response)
     {
         $this->response = $response;
+    }
+
+    /**
+     * @param mixed $sdk_name
+     */
+    public function setSdkName($sdk_name)
+    {
+        $this->sdk_name = $sdk_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSdkName()
+    {
+        return $this->sdk_name;
+    }
+
+    /**
+     * @param mixed $credentials
+     */
+    public function setCredentials($credentials)
+    {
+        $this->credentials = $credentials;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCredentials()
+    {
+        return $this->credentials;
     }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace Gateways\Model;
 
-class Payment
+use Gateways\Interfaces\ModelsInterface;
+
+class Payment implements ModelsInterface
 {
     protected $public_key;
     protected $private_key;
@@ -54,7 +56,7 @@ class Payment
     /**
      * @return string
      */
-    public function getTokenCard(): string
+    public function getTokenCard()
     {
         return $this->token_card;
     }
@@ -62,7 +64,7 @@ class Payment
     /**
      * @param string $token_card
      */
-    public function setTokenCard(string $token_card)
+    public function setTokenCard($token_card)
     {
         $this->token_card = $token_card;
     }
