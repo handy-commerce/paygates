@@ -39,21 +39,24 @@ class Api
 
     }
 
-    public function createPaymentPSE($fields){
-        $epayco = new Epayco(array(
-            "apiKey" => $fields['public_key'],
-            "privateKey" => $fields['private_key'],
-            "lenguage" => "ES",
-            "test" => true
-        ));
-        return $pse = $epayco->bank->create($fields);
-
-    }
-
     public function createPayment($data){
         $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
         $this->sdk = $sdk->getSDK();
-        $this->response = $this->sdk->charge->create($data);
+        $this->setResponse($this->sdk->charge->create($data));
+    }
+
+    public function createPaymentPSE($data){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        $this->sdk = $sdk->getSDK();
+        $this->setResponse($this->sdk->bank->create($data));
+
+    }
+
+    public function createPaymentCash($channel,$data){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        $this->sdk = $sdk->getSDK();
+        $this->setResponse($this->sdk->cash->create($channel,$data));
+
     }
 
     /**

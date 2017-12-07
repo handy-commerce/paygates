@@ -1,8 +1,31 @@
 <?php
 namespace Gateways\Model;
 
-class PaymentCash extends PaymentPSE
+use Gateways\Interfaces\ModelCashInterface;
+
+class PaymentCash implements ModelCashInterface
 {
+
+    protected $public_key;
+    protected $private_key;
+    protected $invoice;
+    protected $description;
+    protected $value;
+    protected $tax;
+    protected $tax_base;
+    protected $currency;
+    protected $type_person;
+    protected $doc_type;
+    protected $doc_number;
+    protected $name;
+    protected $last_name;
+    protected $email;
+    protected $cell_phone;
+    protected $end_date;
+    protected $url_response;
+    protected $url_confirmation;
+    protected $method_confirmation;
+    public $details;
 
     public function __construct()
     {
@@ -22,6 +45,22 @@ class PaymentCash extends PaymentPSE
     public function setPublicKey($public_key)
     {
         $this->public_key = $public_key;
+    }
+
+    /**
+     * @param mixed $private_key
+     */
+    public function setPrivateKey($private_key)
+    {
+        $this->private_key = $private_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivateKey()
+    {
+        return $this->private_key;
     }
 
     /**
@@ -235,38 +274,6 @@ class PaymentCash extends PaymentPSE
     /**
      * @return mixed
      */
-    public function getDues()
-    {
-        return $this->dues;
-    }
-
-    /**
-     * @param mixed $dues
-     */
-    public function setDues($dues)
-    {
-        $this->dues = $dues;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param mixed $country
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getCellPhone()
     {
         return $this->cell_phone;
@@ -278,6 +285,22 @@ class PaymentCash extends PaymentPSE
     public function setCellPhone($cell_phone)
     {
         $this->cell_phone = $cell_phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * @param mixed $end_date
+     */
+    public function setEndDate($end_date)
+    {
+        $this->end_date = $end_date;
     }
 
     /**
@@ -345,11 +368,19 @@ class PaymentCash extends PaymentPSE
             'name' => $this->name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'country' => $this->country,
+            'end_date' => $this->end_date,
             'cell_phone' => $this->cell_phone,
             'url_response' => $this->url_response,
             'url_confirmation' => $this->url_confirmation,
             'method_confirmation' => $this->method_confirmation,
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

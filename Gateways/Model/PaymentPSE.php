@@ -1,8 +1,12 @@
 <?php
 namespace Gateways\Model;
 
-class PaymentPSE extends Payment
+use \Gateways\Interfaces\ModelPSEInterface;
+
+class PaymentPSE implements ModelPSEInterface
 {
+    protected $public_key;
+    protected $private_key;
     protected $bank;
     protected $invoice;
     protected $description;
@@ -21,6 +25,7 @@ class PaymentPSE extends Payment
     protected $url_response;
     protected $url_confirmation;
     protected $method_confirmation;
+    public $details;
 
     public function __construct()
     {
@@ -40,6 +45,22 @@ class PaymentPSE extends Payment
     public function setPublicKey($public_key)
     {
         $this->public_key = $public_key;
+    }
+
+    /**
+     * @param mixed $private_key
+     */
+    public function setPrivateKey($private_key)
+    {
+        $this->private_key = $private_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivateKey()
+    {
+        return $this->private_key;
     }
 
     /**
@@ -354,6 +375,14 @@ class PaymentPSE extends Payment
             'url_confirmation' => $this->url_confirmation,
             'method_confirmation' => $this->method_confirmation,
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getDetails()
+    {
+        return $this->details;
     }
 
 }

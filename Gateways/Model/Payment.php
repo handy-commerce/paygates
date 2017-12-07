@@ -1,9 +1,9 @@
 <?php
 namespace Gateways\Model;
 
-use Gateways\Interfaces\ModelsInterface;
+use Gateways\Interfaces\ModelCreditCardInterface;
 
-class Payment implements ModelsInterface
+class Payment implements ModelCreditCardInterface
 {
     protected $public_key;
     protected $private_key;
