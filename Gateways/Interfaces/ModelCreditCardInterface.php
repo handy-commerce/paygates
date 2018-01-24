@@ -13,6 +13,10 @@ interface ModelCreditCardInterface extends ModelsInterface
     //Setters
     public function setTokenCard($token_card);
     public function setCustomerId($customer_id);
+    public function setCardNumber($card_number);
+    public function setCardExpYear($card_exp_year);
+    public function setCardExpMonth($card_exp_month);
+    public function setCardCvc($card_cvc);
     public function setBill($bill);
     public function setDescription($description);
     public function setTax($tax);
@@ -22,6 +26,10 @@ interface ModelCreditCardInterface extends ModelsInterface
     //Getters
     public function getTokenCard();
     public function getCustomerId();
+    public function getCardNumber();
+    public function getCardExpYear();
+    public function getCardExpMonth();
+    public function getCardCvc();
     public function getBill();
     public function getDescription();
     public function getTax();

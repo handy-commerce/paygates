@@ -9,6 +9,10 @@ class Payment implements ModelCreditCardInterface
     protected $private_key;
     protected $token_card;
     protected $customer_id;
+    protected $card_number;
+    protected $card_exp_year;
+    protected $card_exp_month;
+    protected $card_cvc;
     protected $doc_type;
     protected $doc_number;
     protected $name;
@@ -315,4 +319,43 @@ class Payment implements ModelCreditCardInterface
         return $this->public_key;
     }
 
+    public function setCardNumber($card_number)
+    {
+        $this->card_number = $card_number;
+    }
+
+    public function setCardExpYear($card_exp_year)
+    {
+        $this->card_exp_year = $card_exp_year;
+    }
+
+    public function setCardExpMonth($card_exp_month)
+    {
+        $this->card_exp_month = $card_exp_month;
+    }
+
+    public function setCardCvc($card_cvc)
+    {
+        $this->card_cvc = $card_cvc;
+    }
+
+    public function getCardNumber()
+    {
+        return $this->card_number;
+    }
+
+    public function getCardExpYear()
+    {
+        return $this->card_exp_year;
+    }
+
+    public function getCardExpMonth()
+    {
+        return $this->card_exp_month;
+    }
+
+    public function getCardCvc()
+    {
+        return $this->card_cvc;
+    }
 }
