@@ -57,6 +57,22 @@ class Sdk implements SdkInterface
         return $this->name;
     }
 
+    public function createToken($data){
+        switch ($this->getName()){
+            case 'epayco':
+                $token = $this->sdk->token->create($data);
+                return $token;
+                break;
+        }
+    }
 
+    public function createCustomer($data){
+        switch ($this->getName()){
+            case 'epayco':
+                $customer = $this->sdk->customer->create($data);
+                return $customer;
+                break;
+        }
+    }
 
 }

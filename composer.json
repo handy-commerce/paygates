@@ -18,6 +18,9 @@
     "require": {
         "epayco/epayco-php" : "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
     "repositories": [
         {
             "type": "vcs",

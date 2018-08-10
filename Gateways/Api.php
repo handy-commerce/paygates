@@ -17,6 +17,12 @@ class Api
 
     protected $credentials;
 
+    protected $token;
+
+    public function __construct()
+    {
+    }
+
     /**
      * @param $method
      * @param array $fields
@@ -35,8 +41,14 @@ class Api
         return $this->options['sandbox'] ? 'http://sandbox.example.com' : 'http://example.com';
     }
 
-    public function createToken(){
+    public function createToken($data){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        return $sdk->createToken($data);
+    }
 
+    public function createCustomer($data){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        return $sdk->createCustomer($data);
     }
 
     public function createPayment($data){
@@ -56,7 +68,6 @@ class Api
         $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
         $this->sdk = $sdk->getSDK();
         $this->setResponse($this->sdk->cash->create($channel,$data));
-
     }
 
     /**
