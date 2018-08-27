@@ -16,7 +16,8 @@
         }
     ],
     "require": {
-        "epayco/epayco-php" : "dev-master"
+        "epayco/epayco-php" : "dev-master",
+        "mercadopago/dx-php": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

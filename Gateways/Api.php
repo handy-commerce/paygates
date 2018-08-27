@@ -70,6 +70,12 @@ class Api
         $this->setResponse($this->sdk->cash->create($channel,$data));
     }
 
+    public function getTransaction($id){
+        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
+        $this->sdk = $sdk->getSDK();
+        $this->setResponse($this->sdk->bank->get($id));
+    }
+
     /**
      * @return mixed
      */

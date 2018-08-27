@@ -147,7 +147,7 @@ class testApiEpayco extends TestCase
     public function testCreatePaymentPSE(){
         $this->setup();
         $this->api->createPaymentPSE(array(
-            "bank" => "1022",
+            "bank" => "1007",
             "invoice" => "1472050778",
             "description" => "Pago pruebas",
             "value" => "10000",
@@ -169,6 +169,39 @@ class testApiEpayco extends TestCase
         $response = $this->api->getResponse();
         $this->assertTrue(
             isset($response->success)
+        );
+    }
+
+
+    public function testGetTransaction(){
+        $this->setup();
+        $this->api->createPaymentPSE(array(
+            "bank" => "1007",
+            "invoice" => "1472050778",
+            "description" => "Pago pruebas",
+            "value" => "10000",
+            "tax" => "0",
+            "tax_base" => "0",
+            "currency" => "COP",
+            "type_person" => "0",
+            "doc_type" => "CC",
+            "doc_number" => "10358519",
+            "name" => "PRUEBAS",
+            "last_name" => "PAYCO",
+            "email" => "no-responder@payco.co",
+            "country" => "CO",
+            "cell_phone" => "3010000001",
+            "url_response" => "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+            "url_confirmation" => "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
+            "method_confirmation" => "POST",
+        ));
+        $response = $this->api->getResponse();
+
+        $this->api->getTransaction($response->data->transactionID);
+        $transaction = $this->api->getResponse();
+
+        $this->assertTrue(
+            isset($transaction->success)
         );
     }
 
