@@ -11,7 +11,7 @@ class Api
     /**
      * @var sdk
      */
-    protected $sdk;
+    private $sdk;
 
     protected $sdk_name;
 
@@ -19,8 +19,15 @@ class Api
 
     protected $token;
 
-    public function __construct()
+    public function __construct($gateway_name,$credentials)
     {
+        $this->setCredentials($credentials);
+        $this->setSdkName($gateway_name);
+        switch($this->getSdkName()){
+            case 'epayco':
+                $this->setSdk(new Sdk($this->getSdkName(),$this->getCredentials()));
+                break;
+        }
     }
 
     /**
@@ -42,38 +49,32 @@ class Api
     }
 
     public function createToken($data){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        return $sdk->createToken($data);
+        return $this->sdk->createToken($data);
     }
 
     public function createCustomer($data){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        return $sdk->createCustomer($data);
+        return $this->sdk->createCustomer($data);
     }
 
     public function createPayment($data){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        $this->sdk = $sdk->getSDK();
-        $this->setResponse($this->sdk->charge->create($data));
+        $sdk = $this->sdk->getSDK();
+        $this->setResponse($sdk->charge->create($data));
     }
 
     public function createPaymentPSE($data){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        $this->sdk = $sdk->getSDK();
-        $this->setResponse($this->sdk->bank->create($data));
+        $sdk = $this->sdk->getSDK();
+        $this->setResponse($sdk->bank->create($data));
 
     }
 
     public function createPaymentCash($channel,$data){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        $this->sdk = $sdk->getSDK();
-        $this->setResponse($this->sdk->cash->create($channel,$data));
+        $sdk = $this->sdk->getSDK();
+        $this->setResponse($sdk->cash->create($channel,$data));
     }
 
     public function getTransaction($id){
-        $sdk = new Sdk($this->getSdkName(),$this->getCredentials());
-        $this->sdk = $sdk->getSDK();
-        $this->setResponse($this->sdk->bank->get($id));
+        $sdk = $this->sdk->getSDK();
+        $this->setResponse($sdk->bank->get($id));
     }
 
     /**
@@ -123,4 +124,38 @@ class Api
     {
         return $this->credentials;
     }
+
+    /**
+     * @return Sdk
+     */
+    public function getSdk()
+    {
+        return $this->sdk;
+    }
+
+    /**
+     * @param Sdk $sdk
+     */
+    public function setSdk(Sdk $sdk)
+    {
+        $this->sdk = $sdk;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param mixed $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+
 }

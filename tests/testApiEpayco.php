@@ -40,14 +40,20 @@ class testApiEpayco extends TestCase
 
     protected function setup()
     {
-        $this->api = new Api();
-        $this->api->setSdkName($this->sdk_name);
-
         $this->apiKey = "491d6a0b6e992cf924edd8d3d088aff1";
         $this->privateKey = "268c8e0162990cf2ce97fa7ade2eff5a";
         $this->lenguage = "ES";
         $this->test = true;
         $this->client;
+
+        $credentials = array(
+            'apiKey' => $this->apiKey,
+            'privateKey' => $this->privateKey,
+            'lenguage' => $this->lenguage,
+            'test' => $this->test
+        );
+
+        $this->api = new Api('epayco',$credentials);
 
         $this->testCard = array(
         "card[number]" => '4575623182290326',
@@ -55,12 +61,6 @@ class testApiEpayco extends TestCase
         "card[exp_month]" => "07",
         "card[cvc]" => "123");
 
-        $this->api->setCredentials(array(
-            'apiKey' => $this->apiKey,
-            'privateKey' => $this->privateKey,
-            'lenguage' => $this->lenguage,
-            'test' => $this->test
-        ));
     }
 
 
