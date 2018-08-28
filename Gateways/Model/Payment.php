@@ -5,8 +5,6 @@ use Gateways\Interfaces\ModelCreditCardInterface;
 
 class Payment implements ModelCreditCardInterface
 {
-    protected $public_key;
-    protected $private_key;
     protected $token_card;
     protected $customer_id;
     protected $card_number;
@@ -31,30 +29,6 @@ class Payment implements ModelCreditCardInterface
     public function __construct()
     {
 
-    }
-
-    /**
-     * @param mixed $private_key
-     */
-    public function setPrivateKey($private_key)
-    {
-        $this->private_key = $private_key;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrivateKey()
-    {
-        return $this->private_key;
-    }
-
-    /**
-     * @param mixed $public_key
-     */
-    public function setPublicKey($public_key)
-    {
-        $this->public_key = $public_key;
     }
 
     /**
@@ -292,8 +266,6 @@ class Payment implements ModelCreditCardInterface
     public function setDetails()
     {
         $this->details = array(
-            'public_key' => $this->public_key,
-            'private_key' => $this->private_key,
             'token_card' => $this->token_card,
             'customer_id' => $this->customer_id,
             'doc_type' => $this->doc_type,
@@ -309,14 +281,6 @@ class Payment implements ModelCreditCardInterface
             'currency' => $this->currency,
             'dues' => $this->dues
         );
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublicKey()
-    {
-        return $this->public_key;
     }
 
     public function setCardNumber($card_number)

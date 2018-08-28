@@ -5,8 +5,6 @@ use \Gateways\Interfaces\ModelPSEInterface;
 
 class PaymentPSE implements ModelPSEInterface
 {
-    protected $public_key;
-    protected $private_key;
     protected $bank;
     protected $invoice;
     protected $description;
@@ -29,38 +27,6 @@ class PaymentPSE implements ModelPSEInterface
 
     public function __construct()
     {
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublicKey()
-    {
-        return $this->public_key;
-    }
-
-    /**
-     * @param mixed $public_key
-     */
-    public function setPublicKey($public_key)
-    {
-        $this->public_key = $public_key;
-    }
-
-    /**
-     * @param mixed $private_key
-     */
-    public function setPrivateKey($private_key)
-    {
-        $this->private_key = $private_key;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrivateKey()
-    {
-        return $this->private_key;
     }
 
     /**
@@ -354,8 +320,6 @@ class PaymentPSE implements ModelPSEInterface
     public function setDetails()
     {
         $this->details = array(
-            'public_key' => $this->public_key,
-            'private_key' => $this->private_key,
             'bank' => $this->bank,
             'invoice' => $this->invoice,
             'description' => $this->description,
