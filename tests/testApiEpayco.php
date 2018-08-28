@@ -148,7 +148,7 @@ class testApiEpayco extends TestCase
         $this->setup();
         $this->api->createPaymentPSE(array(
             "bank" => "1007",
-            "invoice" => "1472050778",
+            "invoice" => "78kk98kl98",
             "description" => "Pago pruebas",
             "value" => "10000",
             "tax" => "0",

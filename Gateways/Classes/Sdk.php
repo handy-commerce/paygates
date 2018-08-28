@@ -10,6 +10,8 @@ namespace Gateways\Classes;
 
 use Gateways\Interfaces\SdkInterface;
 use Epayco\Epayco;
+use MercadoPago\SDK as MercadoPago;
+use MercadoPago\Customer as MercadoCustomer;
 
 class Sdk implements SdkInterface
 {
@@ -33,6 +35,10 @@ class Sdk implements SdkInterface
         switch ($this->getName()){
             case 'epayco':
                 $this->sdk = new Epayco($this->credentials);
+                break;
+            case 'mercadopago':
+                $credentials = $this->credentials;
+                MercadoPago::setAccessToken($credentials['accessToken']);
                 break;
         }
     }
@@ -69,6 +75,10 @@ class Sdk implements SdkInterface
     public function createCustomer($data){
         switch ($this->getName()){
             case 'epayco':
+                $customer = $this->sdk->customer->create($data);
+                return $customer;
+                break;
+            case 'mercadopago':
                 $customer = $this->sdk->customer->create($data);
                 return $customer;
                 break;
