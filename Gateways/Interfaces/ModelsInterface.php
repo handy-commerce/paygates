@@ -10,9 +10,6 @@ namespace Gateways\Interfaces;
 
 interface ModelsInterface
 {
-
-    public function setPublicKey($public_key);
-    public function setPrivateKey($private_key);
     public function setDocType($doc_type);
     public function setDocNumber($doc_number);
     public function setName($name);
