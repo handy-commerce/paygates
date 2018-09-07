@@ -175,29 +175,34 @@ class testApiEpayco extends TestCase
 
     public function testGetTransaction(){
         $this->setup();
-        $this->api->createPaymentPSE(array(
-            "bank" => "1007",
-            "invoice" => "1472050778",
-            "description" => "Pago pruebas",
-            "value" => "10000",
-            "tax" => "0",
-            "tax_base" => "0",
-            "currency" => "COP",
-            "type_person" => "0",
+        $token = $this->api->createToken($this->testCard);
+        $data = array(
+            "token_card" => $token->id,
+            "name" => "Joe Doe",
+            "email" => "joe@payco.co",
+            "phone" => "3005234321",
+            "default" => true
+        );
+        $customer = $this->api->createCustomer($data);
+        $this->api->createPayment(array(
+            "token_card" => $token->id,
+            "customer_id" => $customer->data->customerId,
             "doc_type" => "CC",
-            "doc_number" => "10358519",
-            "name" => "PRUEBAS",
-            "last_name" => "PAYCO",
-            "email" => "no-responder@payco.co",
-            "country" => "CO",
-            "cell_phone" => "3010000001",
-            "url_response" => "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-            "url_confirmation" => "https:/secure.payco.co/restpagos/testRest/endpagopse.php",
-            "method_confirmation" => "POST",
+            "doc_number" => "1035851980",
+            "name" => "John",
+            "last_name" => "Doe",
+            "email" => "example@email.com",
+            "bill" => "OR-1234",
+            "description" => "Test Payment",
+            "value" => "116000",
+            "tax" => "16000",
+            "tax_base" => "100000",
+            "currency" => "COP",
+            "dues" => "12"
         ));
         $response = $this->api->getResponse();
 
-        $this->api->getTransaction($response->data->transactionID);
+        $this->api->getTransaction($response->data->ref_payco,'payment');
         $transaction = $this->api->getResponse();
 
         $this->assertTrue(

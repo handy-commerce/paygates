@@ -72,9 +72,13 @@ class Api
         $this->setResponse($sdk->cash->create($channel,$data));
     }
 
-    public function getTransaction($id){
+    public function getTransaction($id,$type){
         $sdk = $this->sdk->getSDK();
-        $this->setResponse($sdk->bank->get($id));
+        if($this->getSdkName()=='epayco'){
+            if($type === 'payment'){
+                $this->setResponse($sdk->charge->transaction($id));
+            }
+        }
     }
 
     /**
